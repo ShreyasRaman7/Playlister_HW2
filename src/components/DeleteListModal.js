@@ -10,10 +10,12 @@ export default class DeleteListModal extends Component {
         return (
             <div 
                 class="modal" 
+                width = '50%'
                 id="delete-list-modal" 
                 data-animation="slideInOutLeft">
-                    <div class="modal-root" id='verify-delete-list-root'>
-                        <div class="modal-north">
+                    <div class="modal-root" id='verify-delete-list-root' >
+                    
+                        <div class="modal-north" >
                             Delete playlist?
                         </div>
                         <div class="modal-center">
@@ -21,7 +23,7 @@ export default class DeleteListModal extends Component {
                                 Are you sure you wish to permanently delete the {name} playlist?
                             </div>
                         </div>
-                        <div class="modal-south">
+                        <div class="modal-south" >
                             <input type="button" 
                                 id="delete-list-confirm-button" 
                                 class="modal-button" 

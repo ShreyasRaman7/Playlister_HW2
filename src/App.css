@@ -156,8 +156,21 @@ body {
 .playlister-song, .playlister-song-dragged-to { 
   display:flex;
   align-items: center;
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: var(--swatch-complement);
+  
   font-size: 24pt;
   height:20%;
+}
+
+.playlister-song:hover { 
+  
+  background-color: gray;
+  
 }
 
 input {
