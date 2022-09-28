@@ -19,6 +19,7 @@ body {
 
 #root {
   background-color: var(--swatch-primary);
+  
   font-family: Tangerine,cursive;
   position: absolute;
   width: 80%;
@@ -47,7 +48,7 @@ body {
   background-image: linear-gradient(to bottom,         
   #b8b808, #636723);
   color: white;
-  font-size: 54pt;
+  font-size: 44pt;
   border-color: black;
   border-width: 2px;
   border-style: solid;
@@ -58,7 +59,7 @@ body {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   text-align:center;
-  font-size: 36pt;
+  font-size: 26pt;
   font-weight: bold;
   display:flex;
   flex-direction: row;
@@ -153,8 +154,11 @@ body {
   cursor: not-allowed;
 }
 
+.delete-song{
+  float:right;
+}
+
 .playlister-song, .playlister-song-dragged-to { 
-  display:flex;
   align-items: center;
   border-radius: 20px;
   margin-top: 5px;
@@ -204,8 +208,8 @@ input {
 
 .modal-root {
   position: relative;
-  max-width: 1200vw;
-  max-height: 600vh;
+  max-width: 600px;
+  max-height: 400vh;
   overflow: visible;
   display: flex;
   flex-direction: column;
@@ -215,6 +219,7 @@ input {
   border-color: black;
   border-style: solid;
   box-shadow: 5px 10px #888888;
+
 }
 
 .modal-root > * {
@@ -252,6 +257,7 @@ span {
 .modal-center-content {
   grid-column: 1 / 3;
   grid-row: 1 / 4;
+  font-size: 28px;
 }
 
 .modal-prompt {  

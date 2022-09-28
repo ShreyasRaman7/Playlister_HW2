@@ -167,6 +167,18 @@ class App extends React.Component {
             this.db.mutationUpdateSessionData(this.state.sessionData);
         });
     }
+    ///shreyas trying editsong modal
+
+    
+
+    ///--------shreyas trying editsong modal end----
+
+    ///-----shreyas trying delete song modal
+
+    
+
+    ///shreyas trying delete song modal end----
+
     // THIS FUNCTION BEGINS THE PROCESS OF LOADING A LIST FOR EDITING
     loadList = (key) => {
         let newCurrentList = this.db.queryGetList(key);
@@ -265,15 +277,29 @@ class App extends React.Component {
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
-    showDeleteListModal() {
-        let modal = document.getElementById("delete-list-modal");
-        modal.classList.add("is-visible");
+    
+
+    //--shreyas trying delete and add song -------------
+    // 
+    deleteSong = (index) =>{
+        let list = this.state.currentList;
+
     }
-    // THIS FUNCTION IS FOR HIDING THE MODAL
-    hideDeleteListModal() {
-        let modal = document.getElementById("delete-list-modal");
-        modal.classList.remove("is-visible");
-    }
+
+    addSong = () =>{
+        let list1 = this.state.currentList;
+        let song1 = {
+            title: 'Untitled',
+            artist: 'Unknown',
+            youTubeId: 'dQw4w9WgXcQ'
+        };
+        list1.songs.push(song1);
+        this.setStateWithUpdatedList(list1);
+    };
+
+    //---shreyas------------------
+
+
     render() {
         let canAddSong = this.state.currentList !== null;
         let canUndo = this.tps.hasTransactionToUndo();
@@ -297,6 +323,8 @@ class App extends React.Component {
                     canUndo={canUndo}
                     canRedo={canRedo}
                     canClose={canClose} 
+                    addSongCallback={this.addSong}
+                    deleteSongCallback={this.deleteSong}
                     undoCallback={this.undo}
                     redoCallback={this.redo}
                     closeCallback={this.closeCurrentList}
