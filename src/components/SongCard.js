@@ -53,7 +53,12 @@ export default class SongCard extends React.Component {
         // ASK THE MODEL TO MOVE THE DATA
         this.props.moveCallback(sourceId, targetId);
     }
+
     handleDeleteSong = (event) =>{
+        this.props.deleteSongCallback(this.getItemNum()-1, this.props.song)
+
+    }
+    handleEditSong = (event) =>{
         let num = this.getItemNum;
 
     }
@@ -65,10 +70,12 @@ export default class SongCard extends React.Component {
 
     render() {
         const { song } = this.props;
+        
+        
         let num = this.getItemNum();
-        console.log("num: " + num);
+        //console.log("num: " + num);
         let itemClass = "playlister-song";
-        let songKeyNamePair ={key: num-1, name: song.title};
+        //let songKeyNamePair ={key: num-1, name: song.title};
         let songKeyPair = {key:num-1, song:song};
         if (this.state.draggedTo) {
             itemClass = "playlister-song-dragged-to";
@@ -88,7 +95,7 @@ export default class SongCard extends React.Component {
             >
                 
                 {num}. <a href={"https://www.youtube.com/watch?v=" +song.youTubeId}  id = {"song-" +num} >  {song.title} by {song.artist}</a>
-                <input type='button' id={'delete-song-' +num}className='list-card-button' value={'X'} onClick={ () => this.props.onDeleteSong(songKeyNamePair)}/>
+                <input type='button' id={'delete-song-' +num}className='list-card-button' value={'X'} onClick={ this.handleDeleteSong}/>
             </div>
         )
     }

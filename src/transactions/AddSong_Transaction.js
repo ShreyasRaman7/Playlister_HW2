@@ -10,11 +10,15 @@ import jsTPS_Transaction from "../common/jsTPS.js"
  * @author ?
  */
 export default class CreateSong_Transaction extends jsTPS_Transaction {
-    constructor(initApp, initIndex, initSong) {
+    constructor(initApp, initIndex) {
         super();
         this.app = initApp;
         this.index = initIndex;
-        this.newSong = initSong;
+        this.newSong = {
+            title: 'Untitled',
+            artist: 'Unknown',
+            youTubeId: 'dQw4w9WgXcQ'
+        };
     }
 
     doTransaction() {
