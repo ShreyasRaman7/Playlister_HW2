@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 export default class DeleteSongModal extends Component {
     render() {
-        const { listKeyPair, deleteSongCallback, hideDeleteSongModalCallback } = this.props;
-        let name = "";
-        if (listKeyPair) {
-            name = listKeyPair.name;
+        const { keyNamePair,deleteSongId,deleteSongCallback, hideDeleteSongModalCallback } = this.props;
+        let name ='';
+        if(keyNamePair){
+            name=keyNamePair.name;
         }
         return (
             <div 
@@ -27,12 +27,12 @@ export default class DeleteSongModal extends Component {
                             <input type="button" 
                                 id="delete-song-confirm-button" 
                                 class="modal-button" 
-                                onClick={deleteListCallback}
+                                onClick={deleteSongCallback}
                                 value='Confirm' />
                             <input type="button" 
                                 id="delete-song-cancel-button" 
                                 class="modal-button" 
-                                onClick={hideDeleteListModalCallback}
+                                onClick={hideDeleteSongModalCallback}
                                 value='Cancel' />
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import jsTPS_Transaction from "../../common/jsTPS.js"
+import jsTPS_Transaction from "../common/jsTPS.js"
 
 /**
  * CreateSong_Transaction
@@ -14,15 +14,15 @@ export default class CreateSong_Transaction extends jsTPS_Transaction {
         super();
         this.app = initApp;
         this.index = initIndex;
-        this.song = initSong;
+        this.newSong = initSong;
     }
 
     doTransaction() {
-        this.app.createSong();
+        this.app.addSong(this.newSong, this.index);
     }
     
     undoTransaction() {
-        this.app.removeSong(this.index);
+        this.app.deleteSong(this.index);
         //set state with updated list
     }
 }
