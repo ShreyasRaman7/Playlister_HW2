@@ -434,7 +434,25 @@ class App extends React.Component {
             modal.classList.remove('is-visible');
         });
     }
+    
+    handleUndoRedo = (event) => {
+         if(event.metaKey || event.ctrlKey  ) {
+                event.preventDefault();
+                if(event.keyCode === 90) {
+                     this.undo();
+                     
+                    this.forceUpdate();
+                }
+                if(event.keyCode === 89) {
+                    this.redo();
+                    this.forceUpdate();
+                }
+            }
+    }
 
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleUndoRedo);
+    }
     //---shreyas------------------
 
 
