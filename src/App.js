@@ -282,11 +282,13 @@ class App extends React.Component {
         let userArtist=document.getElementById("artist")
         let userTitle=document.getElementById("title")
         let userYoutubeId=document.getElementById("youtubeid")
+        console.log("---\ntest youtube id")
+        console.log(userYoutubeId.value)
         
         let userNewSong={
             "artist": userArtist.value,
             "title": userTitle.value,
-            "youTubeid": userYoutubeId.value
+            "youTubeId": userYoutubeId.value
         }
         let transaction = new EditSong_Transaction(this, this.state.currentIndex,userNewSong,oldSong);
         this.tps.addTransaction(transaction);
@@ -378,6 +380,17 @@ class App extends React.Component {
 
     }
 
+    editSong=(editedSong, index) =>
+    {
+        console.log("Entering Edit Song")
+        let list1 = this.state.currentList;
+        list1.songs[index]=editedSong;
+        this.hideEditSongModal();
+
+        this.setStateWithUpdatedList(list1);
+        
+    }
+
     addSong = (newSong,index) =>{
         let list1 = this.state.currentList;
         
@@ -403,19 +416,22 @@ class App extends React.Component {
     }
 
     showEditSongModal(){
+        console.log("entering show edit song modal")
         this.setState(prevState => ({
             modalOpen:true
     }),()=>{
         let modal =document.getElementById('edit-song-modal');
-        modal.classList.add('isVisible');
+        modal.classList.add('is-visible');
+        console.log("modal should be visible")
     });   
 }
     hideEditSongModal = () =>{
+        console.log("entered hide edit song modal")
         this.setState(prevState => ({
             modalOpen:false
     }),()=>{
             let modal =document.getElementById('edit-song-modal');
-            modal.classList.remove('isVisible');
+            modal.classList.remove('is-visible');
         });
     }
 
@@ -423,7 +439,8 @@ class App extends React.Component {
 
 
     render() {
-        let canAddSong = this.state.currentList !== null;
+        let canAddSong = this.state.currentList !== null && this.state.listOpen;
+        //let canAddList = !this.state.listOpen;
         let canUndo = this.tps.hasTransactionToUndo();
         let canRedo = this.tps.hasTransactionToRedo();
         let canClose = this.state.currentList !== null;

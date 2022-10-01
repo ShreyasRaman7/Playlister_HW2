@@ -18,10 +18,10 @@ export default class EditSong_Transaction extends jsTPS_Transaction {
     }
 
     doTransaction() {
-        this.app.editSong(this.songIndex);
+        this.app.editSong(this.newSong,this.songIndex);
     }
     
     undoTransaction() {
-        this.app.undoEditSong(this.this.songIndex, this.songObject);
+        this.app.undoEditSong(this.prevSong, this.songIndex);
     }
 }

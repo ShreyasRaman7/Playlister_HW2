@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 
 export default class EditSongModal extends Component {
     render() {
-        const { listKeyPair, editSongCallback, hideEditSongModalCallback } = this.props;
-        let name = "";
-        if (listKeyPair) {
-            name = listKeyPair.name;
-        }
+        const {  editSongCallback, hideEditSongModalCallback } = this.props;
+        
         return (
             <div 
                 class="modal" 
@@ -20,7 +17,10 @@ export default class EditSongModal extends Component {
                         </div>
                         <div class="modal-center">
                             <div class="modal-center-content">
-                                Are you sure you wish to edit the {name} playlist?
+                                
+                                Title:   <input type="text" id="title" name ="title" />
+                                Artist:   <input type="text" id="artist" name ="artist" />
+                                Youtube Id:   <input type="text" id="youtubeid" name ="youtubeid" />
                             </div>
                         </div>
                         <div class="modal-south" >
