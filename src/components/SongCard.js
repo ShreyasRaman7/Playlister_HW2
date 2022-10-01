@@ -53,20 +53,26 @@ export default class SongCard extends React.Component {
         // ASK THE MODEL TO MOVE THE DATA
         this.props.moveCallback(sourceId, targetId);
     }
-
-    handleDeleteSong = (event) =>{
-        this.props.deleteSongCallback(this.getItemNum()-1, this.props.song)
-
-    }
-    handleEditSong = (event) =>{
-        let num = this.getItemNum;
-
-    }
-
-
     getItemNum = () => {
         return this.props.id.substring("playlist-song-".length);
     }
+    //shreyas handling 
+
+    handleDeleteSong = (event) =>{ 
+        event.preventDefault();
+        console.log("does hitting delete button on a song work");
+        this.props.deleteSongCallback(this.getItemNum()-1, this.props.song) ;
+
+    }
+    handleEditSong = (event) =>{
+        event.preventDefault();
+        console.log("does double clicking on a song work");
+        this.props.editSongCallback(  this.getItemNum()-1 );
+
+    }
+
+    //shreyashandling
+    
 
     render() {
         const { song } = this.props;
@@ -75,8 +81,7 @@ export default class SongCard extends React.Component {
         let num = this.getItemNum();
         //console.log("num: " + num);
         let itemClass = "playlister-song";
-        //let songKeyNamePair ={key: num-1, name: song.title};
-        let songKeyPair = {key:num-1, song:song};
+        
         if (this.state.draggedTo) {
             itemClass = "playlister-song-dragged-to";
         }
@@ -90,7 +95,7 @@ export default class SongCard extends React.Component {
                 onDragLeave={this.handleDragLeave}
                 onDrop={this.handleDrop}
                 draggable="true"
-                onDoubleClick={() => this.props.onEditSong(songKeyPair)}
+                onDoubleClick={this.handleEditSong}
                 
             >
                 

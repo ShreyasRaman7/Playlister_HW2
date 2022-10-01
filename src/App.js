@@ -278,7 +278,7 @@ class App extends React.Component {
 
     // THIS FUNCTION ADDS A MoveSong_Transaction TO THE TRANSACTION STACK
     addEditSongTransaction = () => {
-        let oldSong=this.state.currentList.songs[this.state.currSongIndex]
+        let oldSong=this.state.currentList.songs[this.state.currentIndex]
         let userArtist=document.getElementById("artist")
         let userTitle=document.getElementById("title")
         let userYoutubeId=document.getElementById("youtubeid")
@@ -288,7 +288,7 @@ class App extends React.Component {
             "title": userTitle.value,
             "youTubeid": userYoutubeId.value
         }
-        let transaction = new EditSong_Transaction(this, this.state.currSongIndex,userNewSong,oldSong);
+        let transaction = new EditSong_Transaction(this, this.state.currentIndex,userNewSong,oldSong);
         this.tps.addTransaction(transaction);
     }
     // THIS FUNCTION ADDS A MoveSong_Transaction TO THE TRANSACTION STACK
@@ -330,33 +330,40 @@ class App extends React.Component {
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
     
     //shreyas
-    markSongforEdit = (songKeyPair) => {
+    markSongforEdit = (songIndex) => {
+        console.log("--testing markSongforEdit --");
         this.setState(prevState =>({
-            currentList: prevState.currentList,
-            listKeyPairMarkedForDeletion: prevState.listKeyPairMarkedForDeletion,
-            songKeyNamePairMarkedforDeletion: prevState.songKeyNamePairMarkedForDeletion,
+            currentIndex:songIndex,
+        } ) , ()=>{
+            let title =document.getElementById("title");
+            title.value = this.state.currentList.songs[songIndex].title;
 
-        }))
+            let artist = document.getElementById("artist");
+            artist.value = this.state.currentList.songs[songIndex].artist;
+
+            let youTubeId = document.getElementById("youtubeid");
+            youTubeId.value = this.state.currentList.songs[songIndex].youTubeId;
+            //shreyas trying to show edit song modal
+            console.log("--testing showing editsongmodal --");
+            this.showEditSongModal();
+            //shreyas trying to show edit song modal
+        } );
     }
     markSongforDeletion = (songIndex,songKeyPair) => {
+        console.log("--testing markSongforDeletion --");
         this.setState(prevState =>({
             currentList: prevState.currentList,
             songKeyPairMarkedForDeletion: songKeyPair,
             songKeyNamePairMarkedforDeletion: songIndex,
             
-        }), ()=>{
+        } ) , ()=>{
+            //shreyas trying to show delete song modal
             this.showDeleteSongModal();
-        })
+            //shreyas trying to show delete song modal
+        });
     }
 
-    handleDeleteSong = (index) => {
-        let list=this.state.currentList;
-        if(list!=null){
-            list.songs.splice(index,1);
-        } //checking if list is empty
-        this.setStateWithUpdatedList(list);
     
-    }
 
     //
 
@@ -396,12 +403,20 @@ class App extends React.Component {
     }
 
     showEditSongModal(){
+        this.setState(prevState => ({
+            modalOpen:true
+    }),()=>{
         let modal =document.getElementById('edit-song-modal');
         modal.classList.add('isVisible');
-    }
-    hideEditSongModal(){
-        let modal =document.getElementById('edit-song-modal');
-        modal.classList.remove('isVisible');
+    });   
+}
+    hideEditSongModal = () =>{
+        this.setState(prevState => ({
+            modalOpen:false
+    }),()=>{
+            let modal =document.getElementById('edit-song-modal');
+            modal.classList.remove('isVisible');
+        });
     }
 
     //---shreyas------------------
@@ -439,10 +454,10 @@ class App extends React.Component {
                 <PlaylistCards
                     currentList={this.state.currentList}
                     moveSongCallback={this.addMoveSongTransaction}
-
+                    //shreyas callback
                     deleteSongCallback={this.markSongforDeletion}
                     editSongCallback={this.markSongforEdit}  
-                    onEditSong={this.markSongForEdit}
+                    //shreyas callback
                     />
 
                 <Statusbar 
